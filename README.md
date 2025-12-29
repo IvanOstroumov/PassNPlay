@@ -15,6 +15,7 @@ Perfect for parties, family gatherings, trips, classrooms, and anywhere people w
 - ⚡ Fast setup — start playing in seconds
 - 🎨 Minimalist UI (no graphics or models needed)
 - 🧩 Easily extensible — add new games with simple logic modules
+- 🗺 Disponible in multiple languages
 
 ---
 
