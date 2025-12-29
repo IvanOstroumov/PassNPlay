@@ -20,25 +20,18 @@ Perfect for parties, family gatherings, trips, classrooms, and anywhere people w
 
 ## 🎲 Included / Planned Games
 
-- **Undercover / Who’s the Spy**  
+- **Undercover**  
   One player doesn’t know the secret word. Can the group find them before it’s too late?
-
-- **Out of the Loop**  
-  Everyone knows the topic except one player. Careful questions are the key.
-
-- **Charades / Guess the Word**  
+- **Alias**  
   Guess words or phrases before the timer runs out.
-
-- **Truth or Dare (Smart Mode)**  
-  Context-aware questions and dares, customizable for the group.
-
-- **Quick Quiz**  
-  Short, fun trivia rounds for the whole group.
-
-- **Reaction & Mini Challenges**  
-  Fast tap, memory, and reflex-based party challenges.
-
----
+- **Secret Bomb**
+  A hidden timer is running in the background. Nobody knows when the round will end — the player caught speaking when the bomb explodes loses.
+- **Private Missions**
+  Each player secretly receives a unique objective or behavior to follow during the discussion. Can the group figure out who is acting suspiciously?
+- **Who am I?**
+  Each player must guess who he is based on the answers the rest of the players give him.
+- **Secret fact**
+  Each player will reveal a fact about themeselves, one will have to say the fact that the site gave him. Guess who has the artificial fact.
 
 ## 🛠 Tech Stack
 
