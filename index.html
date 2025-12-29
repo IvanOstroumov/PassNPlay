@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PassNPlay</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="PassNPlay games">
+    <meta name="keywords" content="PassNPlay games">
+    <meta name="author" content="Ivan Ostroumov">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- Adding Bootstrap 5 CSS and Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom CSS for black & white theme with orange-yellow accents */
+        :root {
+            --orange: #FF8C00;
+            --yellow: #FFD700;
+            --dark-gray: #222222;
+            --medium-gray: #444444;
+            --light-gray: #F8F9FA;
+        }
+
+        body {
+            background-color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-gray);
+        }
+
+        /* Header image with 2:1 aspect ratio, limited to 80% width and max size */
+        .header-container {
+            position: relative;
+            width: 80%;
+            max-width: 1200px; /* Maximum size cap */
+            height: 0;
+            padding-top: 40%; /* 2:1 Aspect Ratio of 80% width (80% * 0.5 = 40%) */
+            margin: 0 auto 30px auto;
+            overflow: hidden;
+            background-color: #000; /* Black background as fallback */
+            border-radius: 0 0 15px 15px;
+        }
+
+        .header-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Card styling with black outlines and white background */
+        .game-card {
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid var(--dark-gray) !important;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .card-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--orange), var(--yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-title {
+            color: var(--dark-gray);
+            font-weight: 800;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--dark-gray);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .card-text {
+            color: var(--medium-gray);
+        }
+
+        /* Badge styling */
+        .badge-custom {
+            border: 1px solid var(--dark-gray);
+            color: var(--dark-gray);
+            background-color: white;
+            font-weight: 600;
+        }
+
+        /* Button styling with orange-yellow gradient */
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--orange), var(--yellow));
+            color: white !important;
+            border: 2px solid var(--dark-gray) !important;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-outline-black {
+            border: 2px solid var(--dark-gray) !important;
+            color: var(--dark-gray);
+            font-weight: 600;
+            background-color: white;
+        }
+
+        .btn-outline-black:hover {
+            background-color: var(--dark-gray);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-gray);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 3px solid var(--orange);
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--yellow);
+        }
+
+        /* Section headings */
+        .section-heading {
+            color: var(--dark-gray);
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-heading:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--yellow));
+        }
+
+        /* Call to action section */
+        .cta-section {
+            background-color: white;
+            border: 2px solid var(--dark-gray);
+            border-radius: 10px;
+        }
+
+        .cta-title {
+            color: var(--dark-gray);
+            font-weight: 800;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            .header-container {
+                width: 85%;
+                max-width: 1000px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .header-container {
+                width: 90%;
+                max-width: 800px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                width: 92%;
+                padding-top: 46%; /* Adjusted for 2:1 ratio of 92% width */
+            }
+
+            .card-icon {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                width: 95%;
+                padding-top: 47.5%; /* Adjusted for 2:1 ratio of 95% width */
+                border-radius: 0 0 10px 10px;
+            }
+
+            .game-card {
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Custom divider */
+        .custom-divider {
+            height: 3px;
+            background: linear-gradient(90deg, var(--orange), var(--yellow));
+            width: 100px;
+            margin: 20px auto;
+        }
+
+        /* Optional: Add a subtle background pattern for visual interest */
+        body {
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 140, 0, 0.05) 0%, transparent 20%),
+            radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 20%);
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body>
+<!-- Header with 2:1 aspect ratio image -->
+<header>
+    <div class="header-container">
+        <!-- Your header image - replace src with your image path -->
+        <img src="/header.png" alt="PassNPlay Games Header" class="header-image">
+    </div>
+</header>
+
+<main>
+    <div class="container py-5">
+
+        <!-- Game Cards -->
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="game-card card p-4 fade-in-up" style="animation-delay: 0.1s;">
+                    <div class="card-body text-center">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-user-ninja"></i>
+                        </div>
+                        <h3 class="card-title">Undercover</h3>
+                        <p class="card-text">
+                            Find the secret word… or avoid being found out!
+                        </p>
+                        <div class="mt-4">
+                            <span class="badge badge-custom me-2">Mind</span>
+                            <span class="badge badge-custom me-2">Tricky</span>
+                            <span class="badge badge-custom">3+ Players</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="game-card card p-4 fade-in-up" style="animation-delay: 0.2s;">
+                    <div class="card-body text-center">
+                        <div class="card-icon">
+                            <i class="fa-regular fa-comments"></i>
+                        </div>
+                        <h3 class="card-title">Alias</h3>
+                        <p class="card-text">
+                            Explain or guess as many words as you can and beat the other team!
+                        </p>
+                        <div class="mt-4">
+                            <span class="badge badge-custom me-2">Knowledge</span>
+                            <span class="badge badge-custom me-2">Speedthinking</span>
+                            <span class="badge badge-custom">4+ Players</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="game-card card p-4 fade-in-up" style="animation-delay: 0.3s;">
+                    <div class="card-body text-center">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-bomb"></i>
+                        </div>
+                        <h3 class="card-title">Secret Bomb</h3>
+                        <p class="card-text">
+                            Keep talking… but don’t be the one who gets blown up!
+                        </p>
+                        <div class="mt-4">
+                            <span class="badge badge-custom me-2">Knowledge</span>
+                            <span class="badge badge-custom me-2">Speedthinking</span>
+                            <span class="badge badge-custom">2+ Players</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="game-card card p-4 fade-in-up" style="animation-delay: 0.4s;">
+                    <div class="card-body text-center">
+                        <div class="card-icon">
+                            <i class="fa-brands fa-empire"></i>
+                        </div>
+                        <h3 class="card-title">Private Missions</h3>
+                        <p class="card-text">
+                            Complete your secret goals and figure out what everyone else is up to.
+                        </p>
+                        <div class="mt-4">
+                            <span class="badge badge-custom me-2">Mind</span>
+                            <span class="badge badge-custom">2+ Players</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="game-card card p-4 fade-in-up" style="animation-delay: 0.5s;">
+                    <div class="card-body text-center">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-masks-theater"></i>
+                        </div>
+                        <h3 class="card-title">Who am I?</h3>
+                        <p class="card-text">
+                            Ask smart questions, guess your word, and beat the others to it!
+                        </p>
+                        <div class="mt-4">
+                            <span class="badge badge-custom me-2">Mind</span>
+                            <span class="badge badge-custom me-2">Knowledge</span>
+                            <span class="badge badge-custom">2+ Players</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="col-lg-4 col-md-6">
+                <div class="game-card card p-4 fade-in-up" style="animation-delay: 0.6s;">
+                    <div class="card-body text-center">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-poo"></i>
+                        </div>
+                        <h3 class="card-title">Secret Fact</h3>
+                        <p class="card-text">
+                            Spot the fake fact among the truths and catch the liar!
+                        </p>
+                        <div class="mt-4">
+                            <span class="badge badge-custom me-2">Mind</span>
+                            <span class="badge badge-custom me-2">Tricky</span>
+                            <span class="badge badge-custom">3+ Players</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                <h5>PassNPlay</h5>
+                <p class="mb-0">Party games, all in one place</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <p class="mt-2 mb-0">© 2025 Ivan Ostroumov. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Adding Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Simple script to trigger animations when scrolling
+    document.addEventListener('DOMContentLoaded', function () {
+        // Add animation to elements with the fade-in-up class when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in-up class
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+
+        // Add click handlers for buttons (demo purposes)
+        document.querySelectorAll('.btn-gradient, .btn-outline-black').forEach(btn => {
+            btn.addEventListener('click', function () {
+                alert('Thank you for your interest in PassNPlay! This is a demo website.');
+            });
+        });
+    });
+</script>
+</body>
+</html>
