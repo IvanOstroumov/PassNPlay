@@ -63,6 +63,6 @@ Minimal UI is a feature, not a limitation.
 ## 📦 Getting Started
 
 ```bash
-git clone https://github.com/yourusername/party-games-hub
-cd party-games-hub
+git clone https://github.com/IvanOstroumov/PassNPlay
+cd PassNPlay
 open index.html
