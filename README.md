@@ -18,7 +18,7 @@ Perfect for parties, family gatherings, trips, classrooms, and anywhere people w
 
 ---
 
-## 🎲 Included / Planned Games
+## 🎲 Included
 
 - **Undercover**  
   One player doesn’t know the secret word. Can the group find them before it’s too late?
